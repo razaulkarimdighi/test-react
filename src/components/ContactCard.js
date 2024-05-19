@@ -8,6 +8,7 @@ export default function ContactCard(props) {
         <img className="ui avatar image" src={razaul} alt="razaul"/>
       <div className="content">
         <div className="header">{name}</div>
+        <div className="header">{email}</div>
       </div>
     </div>
   );
