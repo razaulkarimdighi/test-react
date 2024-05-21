@@ -1,41 +1,42 @@
-import React, { Component } from 'react'
+import React, { Component, useEffect, useState } from "react";
 
-export default class AddContact extends Component {
-  state = {
-    name : "",
-    email : "",
-  }
+export default function AddContact() {
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [age, setAge] = useState(17);
 
-  add = (e) =>{
+  function increaseAge(e){
+    setAge(age+1);
     e.preventDefault();
-    if(this.state.name === '' && this.state.email === ''){
-      alert('All the fields are required')
-      return
-    }
-    this.props.addContactHandler(this.state);
-    this.setState({name:'', email:''});
-    console.log(this.state)
+    
   }
 
- 
+
+
+useEffect(() => {
+  console.log(age);
+  
+},[age])
 
 
 
-  render() {
-    return (
-      <div className='ui main'>
-        <h2>Add Contact</h2>
-        <form className='ui form' onSubmit={this.add}>
-            <div className='field'>
-                <label>Name</label>
-                <input type='text' name='name' onChange={(e) => this.setState({name : e.target.value})} value={this.state.name} placeholder='Name'/>
-                <label>Email</label>
-                <input type='text' name='email' onChange={(e) => this.setState({email : e.target.value})} value={this.state.email} placeholder='Email'/>
-            </div>
-            <button className='ui button blue'>Submit</button>
-        </form>
-       
-      </div>
-    )
-  }
+
+
+
+  return (
+    <form>
+      {
+        age>=18 ?
+        <div>
+        <h1>{age}</h1>
+        
+        <input type="email"  placeholder="Enter Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}  placeholder="Enter Password"/>
+        <button type="submit">Submit</button>
+      </div> :
+      <h1>You are kid!</h1>
+      }
+      <button onClick={increaseAge}>Increase</button><br></br>
+    </form>
+  );
 }
